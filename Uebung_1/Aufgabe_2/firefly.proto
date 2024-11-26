@@ -9,5 +9,5 @@ message PhaseRequest {
 }
 
 message PhaseResponse {
-  double phase = 1;
+  double phase = 1.0;
 }

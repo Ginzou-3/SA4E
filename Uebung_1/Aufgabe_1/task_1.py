@@ -4,7 +4,7 @@ import time
 import math
 import random
 
-# Parameter für die Simulation
+# Parameter für die Simulation#
 PHASE_INCREMENT = 0.05  # Geschwindigkeit des eigenen Aufleuchtens
 K = 0.01  # Kopplungsstärke
 UPDATE_INTERVAL = 0.01  # Aktualisierungsintervall in Sekunden

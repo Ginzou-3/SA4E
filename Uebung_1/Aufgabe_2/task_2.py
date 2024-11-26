@@ -9,7 +9,7 @@ import math
 import random
 import logging
 
-# Parameter für die Simulation
+# Parameter für die Simulation#
 PHASE_INCREMENT = 0.1  # Geschwindigkeit des eigenen Aufleuchtens
 K = 0.1  # Kopplungsstärke
 BLINK_INTERVAL = 0.1  # Intervall für das Blinken der Glühwürmchen in Sekunden
