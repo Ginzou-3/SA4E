@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+service FireflyService {
+  rpc SendPhase (PhaseRequest) returns (PhaseResponse) {}
+}
+
+message PhaseRequest {
+  double phase = 1;
+}
+
+message PhaseResponse {
+  double phase = 1;
+}
