@@ -1,0 +1,111 @@
+version: '3.8'
+services:
+
+#  # ================= COCKROACH NODES ====================
+#  cockroach1:
+#    image: cockroachdb/cockroach:v22.2.7
+#    container_name: cockroach1
+#    command: start --insecure --listen-addr=cockroach1 --http-addr=cockroach1:8080 --join=cockroach1,cockroach2,cockroach3
+#    volumes:
+#      - ./cockroach-data/node1:/cockroach/cockroach-data
+#    ports:
+#      - "26257:26257"  # so we can connect from host
+#      - "8081:8080"    # admin UI on host port 8081
+#    networks:
+#      - xmas-network
+#
+#  cockroach2:
+#    image: cockroachdb/cockroach:v22.2.7
+#    container_name: cockroach2
+#    command: start --insecure --listen-addr=cockroach2 --http-addr=cockroach2:8080 --join=cockroach1,cockroach2,cockroach3
+#    volumes:
+#      - ./cockroach-data/node2:/cockroach/cockroach-data
+#    networks:
+#      - xmas-network
+#
+#  cockroach3:
+#    image: cockroachdb/cockroach:v22.2.7
+#    container_name: cockroach3
+#    command: start --insecure --listen-addr=cockroach3 --http-addr=cockroach3:8080 --join=cockroach1,cockroach2,cockroach3
+#    volumes:
+#      - ./cockroach-data/node3:/cockroach/cockroach-data
+#    networks:
+#      - xmas-network
+#
+#  # A small init container to run "cockroach init" once the cluster is up
+#  cockroach-init:
+#    image: cockroachdb/cockroach:v22.2.7
+#    container_name: cockroach-init
+#    command: >
+#      bash -c "
+#      echo 'Waiting for cockroach1 to be ready...' &&
+#      sleep 5 &&
+#      cockroach init --insecure --host=cockroach1:26257"
+#    depends_on:
+#      - cockroach1
+#      - cockroach2
+#      - cockroach3
+#    networks:
+#      - xmas-network
+
+  # ================== XMASWISHES APP ====================
+  xmaswishes1:
+    image: xmaswishes:latest
+    container_name: xmaswishes1
+    environment:
+      # SPRING DATASOURCE pointing to cockroach1:26257
+      # In a real production, you might put a load balancer or multiple addresses
+      SPRING_DATASOURCE_URL: jdbc:postgresql://chasm-shade-4238.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/app/cc-ca.crt
+      SPRING_DATASOURCE_USERNAME: saki
+      SPRING_DATASOURCE_PASSWORD: "WR2cAdG5EJhi5D2mENa7zw"
+      # override other Spring properties if needed
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - xmas-network
+
+  xmaswishes2:
+    image: xmaswishes:latest
+    container_name: xmaswishes2
+    environment:
+      # SPRING DATASOURCE pointing to cockroach1:26257
+      # In a real production, you might put a load balancer or multiple addresses
+      SPRING_DATASOURCE_URL: jdbc:postgresql://chasm-shade-4238.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/app/cc-ca.crt
+      SPRING_DATASOURCE_USERNAME: saki
+      SPRING_DATASOURCE_PASSWORD: "WR2cAdG5EJhi5D2mENa7zw"
+      # override other Spring properties if needed
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - xmas-network
+
+  xmaswishes3:
+    image: xmaswishes:latest
+    container_name: xmaswishes3
+    environment:
+      # SPRING DATASOURCE pointing to cockroach1:26257
+      # In a real production, you might put a load balancer or multiple addresses
+      SPRING_DATASOURCE_URL: jdbc:postgresql://chasm-shade-4238.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/app/cc-ca.crt
+      SPRING_DATASOURCE_USERNAME: saki
+      SPRING_DATASOURCE_PASSWORD: "WR2cAdG5EJhi5D2mENa7zw"
+      # override other Spring properties if needed
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - xmas-network
+
+  # ================ NGINX LOAD BALANCER =================
+  nginx:
+    image: nginx:alpine
+    container_name: xmas-nginx
+    depends_on:
+      - xmaswishes1
+      - xmaswishes2
+      - xmaswishes3
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+    networks:
+      - xmas-network
+
+networks:
+  xmas-network:
+    driver: bridge
