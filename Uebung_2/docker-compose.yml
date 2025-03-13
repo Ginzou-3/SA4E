@@ -57,7 +57,7 @@ services:
       # In a real production, you might put a load balancer or multiple addresses
       SPRING_DATASOURCE_URL: jdbc:postgresql://chasm-shade-4238.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/app/cc-ca.crt
       SPRING_DATASOURCE_USERNAME: saki
-      SPRING_DATASOURCE_PASSWORD: "WR2cAdG5EJhi5D2mENa7zw"
+      SPRING_DATASOURCE_PASSWORD: "ocRWssadUMqW5VIi3ZqHBQ"
       # override other Spring properties if needed
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     networks:
@@ -71,7 +71,7 @@ services:
       # In a real production, you might put a load balancer or multiple addresses
       SPRING_DATASOURCE_URL: jdbc:postgresql://chasm-shade-4238.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/app/cc-ca.crt
       SPRING_DATASOURCE_USERNAME: saki
-      SPRING_DATASOURCE_PASSWORD: "WR2cAdG5EJhi5D2mENa7zw"
+      SPRING_DATASOURCE_PASSWORD: "ocRWssadUMqW5VIi3ZqHBQ"
       # override other Spring properties if needed
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     networks:
@@ -85,7 +85,7 @@ services:
       # In a real production, you might put a load balancer or multiple addresses
       SPRING_DATASOURCE_URL: jdbc:postgresql://chasm-shade-4238.jxf.gcp-europe-west1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=/app/cc-ca.crt
       SPRING_DATASOURCE_USERNAME: saki
-      SPRING_DATASOURCE_PASSWORD: "WR2cAdG5EJhi5D2mENa7zw"
+      SPRING_DATASOURCE_PASSWORD: "ocRWssadUMqW5VIi3ZqHBQ"
       # override other Spring properties if needed
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     networks:
